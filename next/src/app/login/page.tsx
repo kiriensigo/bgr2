@@ -1,30 +1,30 @@
-"use client"
+'use client'
 
-import { useState } from "react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { FaGoogle, FaTwitter } from "react-icons/fa"
+import Link from 'next/link'
+import { useState } from 'react'
+import { FaGoogle, FaTwitter } from 'react-icons/fa'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     // TODO: Implement login logic
-    console.log("Login attempt", { email, password })
+    console.log('Login attempt', { email, password })
   }
 
   const handleGoogleLogin = () => {
     // TODO: Implement Google login
-    console.log("Google login")
+    console.log('Google login')
   }
 
   const handleTwitterLogin = () => {
     // TODO: Implement Twitter login
-    console.log("Twitter login")
+    console.log('Twitter login')
   }
 
   return (
@@ -33,7 +33,13 @@ export default function LoginPage() {
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <Label htmlFor="email">メールアドレス</Label>
-          <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <Input
+            id="email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
         </div>
         <div>
           <Label htmlFor="password">パスワード</Label>
@@ -50,7 +56,10 @@ export default function LoginPage() {
         </Button>
       </form>
       <div className="mt-4">
-        <Link href="/forgot-password" className="text-sm text-blue-600 hover:underline">
+        <Link
+          href="/forgot-password"
+          className="text-sm text-blue-600 hover:underline"
+        >
           パスワードをお忘れですか？
         </Link>
       </div>
@@ -75,7 +84,7 @@ export default function LoginPage() {
       </div>
       <div className="mt-6 text-center">
         <p className="text-sm">
-          アカウントをお持ちでない方は{" "}
+          アカウントをお持ちでない方は{' '}
           <Link href="/signup" className="text-blue-600 hover:underline">
             新規登録
           </Link>
@@ -84,4 +93,3 @@ export default function LoginPage() {
     </div>
   )
 }
-

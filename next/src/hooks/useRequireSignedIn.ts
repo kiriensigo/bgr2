@@ -1,9 +1,9 @@
-"use client"
+'use client'
 
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
-import { useUserState } from '@/hooks/useGlobalState'
 import { useSnackbar } from '@/contexts/SnackbarContext'
+import { useUserState } from '@/hooks/useGlobalState'
 
 export function useRequireSignedIn() {
   const router = useRouter()

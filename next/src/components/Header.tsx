@@ -1,4 +1,4 @@
-import Link from "next/link"
+import Link from 'next/link'
 
 export default function Header() {
   return (
@@ -10,17 +10,26 @@ export default function Header() {
         <nav>
           <ul className="flex flex-wrap justify-center sm:space-x-6">
             <li className="mx-2 my-1">
-              <Link href="/" className="hover:text-accent transition-colors duration-300">
+              <Link
+                href="/"
+                className="hover:text-accent transition-colors duration-300"
+              >
                 ホーム
               </Link>
             </li>
             <li className="mx-2 my-1">
-              <Link href="/games" className="hover:text-accent transition-colors duration-300">
+              <Link
+                href="/games"
+                className="hover:text-accent transition-colors duration-300"
+              >
                 ゲーム一覧
               </Link>
             </li>
             <li className="mx-2 my-1">
-              <Link href="/search" className="hover:text-accent transition-colors duration-300">
+              <Link
+                href="/search"
+                className="hover:text-accent transition-colors duration-300"
+              >
                 検索
               </Link>
             </li>
@@ -40,4 +49,3 @@ export default function Header() {
     </header>
   )
 }
-

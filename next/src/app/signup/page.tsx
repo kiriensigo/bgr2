@@ -1,31 +1,31 @@
-"use client"
+'use client'
 
-import { useState } from "react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { FaGoogle, FaTwitter } from "react-icons/fa"
+import Link from 'next/link'
+import { useState } from 'react'
+import { FaGoogle, FaTwitter } from 'react-icons/fa'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 
 export default function RegisterPage() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [confirmPassword, setConfirmPassword] = useState("")
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     // TODO: Implement signup logic
-    console.log("Signup attempt", { email, password, confirmPassword })
+    console.log('Signup attempt', { email, password, confirmPassword })
   }
 
   const handleGoogleSignup = () => {
     // TODO: Implement Google signup
-    console.log("Google signup")
+    console.log('Google signup')
   }
 
   const handleTwitterSignup = () => {
     // TODO: Implement Twitter signup
-    console.log("Twitter signup")
+    console.log('Twitter signup')
   }
 
   return (
@@ -34,7 +34,13 @@ export default function RegisterPage() {
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <Label htmlFor="email">メールアドレス</Label>
-          <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <Input
+            id="email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
         </div>
         <div>
           <Label htmlFor="password">パスワード</Label>
@@ -81,7 +87,7 @@ export default function RegisterPage() {
       </div>
       <div className="mt-6 text-center">
         <p className="text-sm">
-          すでにアカウントをお持ちの方は{" "}
+          すでにアカウントをお持ちの方は{' '}
           <Link href="/login" className="text-blue-600 hover:underline">
             ログイン
           </Link>
@@ -90,4 +96,3 @@ export default function RegisterPage() {
     </div>
   )
 }
-

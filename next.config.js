@@ -1,11 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["localhost", "example.com"], // 必要に応じて画像のドメインを追加
+    domains: ["localhost", "example.com"],
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
-  experimental: {
-    appDir: true,
-  },
-};
+  transpilePackages: ['@emotion/react'],
+  compiler: {
+    emotion: true
+  }
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig

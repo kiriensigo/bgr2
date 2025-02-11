@@ -1,52 +1,52 @@
-"use client"
+'use client'
 
-import { useState } from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { useSnackbar } from "@/contexts/SnackbarContext"
+import Image from 'next/image'
+import Link from 'next/link'
+import { useState } from 'react'
+import { useSnackbar } from '@/contexts/SnackbarContext'
 
 // 仮のゲームデータ（実際の実装では、APIからデータを取得します）
 const game = {
   id: 1,
-  name: "カタン",
-  image: "/placeholder.svg?height=300&width=300",
-  bggLink: "https://boardgamegeek.com/boardgame/13/catan",
-  amazonLink: "https://www.amazon.co.jp/dp/B00005BFUU?tag=youraffiliateid-22",
+  name: 'カタン',
+  image: '/placeholder.svg?height=300&width=300',
+  bggLink: 'https://boardgamegeek.com/boardgame/13/catan',
+  amazonLink: 'https://www.amazon.co.jp/dp/B00005BFUU?tag=youraffiliateid-22',
   rakutenLink:
-    "https://hb.afl.rakuten.co.jp/hgc/youraffiliateid/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fboardgame%2F10000001%2F",
+    'https://hb.afl.rakuten.co.jp/hgc/youraffiliateid/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fboardgame%2F10000001%2F',
 }
 
 const mechanics = [
-  "オークション",
-  "ダイスロール",
-  "タイル/カード配置",
-  "ブラフ",
-  "エリアマジョリティ",
-  "ワーカープレイスメント",
-  "正体隠匿系",
-  "モジュラーボード",
-  "チキンレース",
-  "ドラフト",
-  "デッキ/バッグビルディング",
-  "トリックテイキング",
-  "拡大再生産",
+  'オークション',
+  'ダイスロール',
+  'タイル/カード配置',
+  'ブラフ',
+  'エリアマジョリティ',
+  'ワーカープレイスメント',
+  '正体隠匿系',
+  'モジュラーボード',
+  'チキンレース',
+  'ドラフト',
+  'デッキ/バッグビルディング',
+  'トリックテイキング',
+  '拡大再生産',
 ]
 
 const tags = [
-  "子どもと大人が遊べる",
-  "子どもにおすすめ",
-  "大人におすすめ",
-  "二人におすすめ",
-  "ソロにおすすめ",
-  "デザイン性が高い",
-  "リプレイ性が高い",
-  "パーティ向き",
-  "謎解き",
-  "チーム戦",
-  "協力",
-  "パズル",
-  "レガシー（ストーリー）",
-  "動物",
+  '子どもと大人が遊べる',
+  '子どもにおすすめ',
+  '大人におすすめ',
+  '二人におすすめ',
+  'ソロにおすすめ',
+  'デザイン性が高い',
+  'リプレイ性が高い',
+  'パーティ向き',
+  '謎解き',
+  'チーム戦',
+  '協力',
+  'パズル',
+  'レガシー（ストーリー）',
+  '動物',
 ]
 
 type ReviewState = {
@@ -75,16 +75,25 @@ export default function ReviewForm() {
     recommendedPlayers: [],
     mechanics: [],
     tags: [],
-    customTags: "",
-    shortComment: "",
+    customTags: '',
+    shortComment: '',
   })
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const { name, value, type } = e.target
     const checked = (e.target as HTMLInputElement).checked
     setReview((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? (checked ? [...(prev[name as keyof ReviewState] as string[]), value] : (prev[name as keyof ReviewState] as string[]).filter((item) => item !== value)) : value,
+      [name]:
+        type === 'checkbox'
+          ? checked
+            ? [...(prev[name as keyof ReviewState] as string[]), value]
+            : (prev[name as keyof ReviewState] as string[]).filter(
+                (item) => item !== value,
+              )
+          : value,
     }))
   }
 
@@ -93,9 +102,9 @@ export default function ReviewForm() {
     // レビュー送信処理
     try {
       // APIコール等の処理
-      setMessage("レビューを投稿しました！")
+      setMessage('レビューを投稿しました！')
     } catch (error) {
-      setMessage("エラーが発生しました")
+      setMessage('エラーが発生しました')
     }
   }
 
@@ -104,7 +113,13 @@ export default function ReviewForm() {
       {/* <Header /> */}
       <h1 className="text-3xl font-bold mb-6">{game.name}のレビュー</h1>
       <div className="flex mb-6">
-        <Image src={game.image || "/placeholder.svg"} alt={game.name} width={300} height={300} className="rounded-lg" />
+        <Image
+          src={game.image || '/placeholder.svg'}
+          alt={game.name}
+          width={300}
+          height={300}
+          className="rounded-lg"
+        />
         <div className="ml-6">
           <h2 className="text-2xl font-semibold mb-2">{game.name}</h2>
           <Link
@@ -135,7 +150,9 @@ export default function ReviewForm() {
       </div>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label className="block mb-2 font-semibold">総合得点: {review.overallScore}</label>
+          <label className="block mb-2 font-semibold">
+            総合得点: {review.overallScore}
+          </label>
           <input
             type="range"
             name="overallScore"
@@ -169,7 +186,9 @@ export default function ReviewForm() {
           </div>
         </div>
         <div>
-          <label className="block mb-2 font-semibold">ルール難度: {review.ruleComplexity}</label>
+          <label className="block mb-2 font-semibold">
+            ルール難度: {review.ruleComplexity}
+          </label>
           <input
             type="range"
             name="ruleComplexity"
@@ -186,7 +205,9 @@ export default function ReviewForm() {
           </div>
         </div>
         <div>
-          <label className="block mb-2 font-semibold">運要素: {review.luckFactor}</label>
+          <label className="block mb-2 font-semibold">
+            運要素: {review.luckFactor}
+          </label>
           <input
             type="range"
             name="luckFactor"
@@ -203,7 +224,9 @@ export default function ReviewForm() {
           </div>
         </div>
         <div>
-          <label className="block mb-2 font-semibold">インタラクション: {review.interaction}</label>
+          <label className="block mb-2 font-semibold">
+            インタラクション: {review.interaction}
+          </label>
           <input
             type="range"
             name="interaction"
@@ -220,7 +243,9 @@ export default function ReviewForm() {
           </div>
         </div>
         <div>
-          <label className="block mb-2 font-semibold">ダウンタイム: {review.downtime}</label>
+          <label className="block mb-2 font-semibold">
+            ダウンタイム: {review.downtime}
+          </label>
           <input
             type="range"
             name="downtime"
@@ -239,7 +264,7 @@ export default function ReviewForm() {
         <div>
           <label className="block mb-2 font-semibold">おすすめプレイ人数</label>
           <div className="flex space-x-4">
-            {[1, 2, 3, 4, 5, "6人以上"].map((num) => (
+            {[1, 2, 3, 4, 5, '6人以上'].map((num) => (
               <label key={num} className="flex items-center">
                 <input
                   type="checkbox"
@@ -312,11 +337,13 @@ export default function ReviewForm() {
             placeholder="このゲームの魅力を一言で表現してください"
           />
         </div>
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+        <button
+          type="submit"
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+        >
           レビューを投稿
         </button>
       </form>
     </div>
   )
 }
-

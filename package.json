@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    // format と lint のスクリプトを削除
+  }
+} 

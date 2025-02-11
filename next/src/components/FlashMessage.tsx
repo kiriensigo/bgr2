@@ -1,34 +1,34 @@
-"use client";
+'use client'
 
-import { useEffect } from "react";
-import { Snackbar, Alert } from "@mui/material";
-import { useSnackbar } from "@/contexts/SnackbarContext";
+import { Snackbar, Alert } from '@mui/material'
+import { useEffect } from 'react'
+import { useSnackbar } from '@/contexts/SnackbarContext'
 
 export function FlashMessage() {
-  const { message, setMessage } = useSnackbar();
+  const { message, setMessage } = useSnackbar()
 
   useEffect(() => {
     if (message) {
       const timer = setTimeout(() => {
-        setMessage("");
-      }, 3000);
+        setMessage('')
+      }, 3000)
 
-      return () => clearTimeout(timer);
+      return () => clearTimeout(timer)
     }
-  }, [message, setMessage]);
+  }, [message, setMessage])
 
-  if (!message) return null;
+  if (!message) return null
 
   return (
     <Snackbar
       open={!!message}
       autoHideDuration={3000}
-      onClose={() => setMessage("")}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      onClose={() => setMessage('')}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
     >
-      <Alert severity="success" sx={{ width: "100%" }}>
+      <Alert severity="success" sx={{ width: '100%' }}>
         {message}
       </Alert>
     </Snackbar>
-  );
+  )
 }
