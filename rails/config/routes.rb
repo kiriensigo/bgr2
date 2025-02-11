@@ -27,7 +27,7 @@ Rails.application.routes.draw do
       end
 
       # ゲーム情報関連
-      resources :games do
+      resources :games, only: [:index, :show] do
         resources :reviews, only: [:index, :create]
         get "stats", to: "games#stats"
       end

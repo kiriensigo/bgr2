@@ -1,11 +1,13 @@
-"use client"
+"use client";
 
-import { SnackbarProvider } from '@/hooks/useGlobalState'
+import { SnackbarProvider } from "@/contexts/SnackbarContext";
+import { FlashMessage } from "@/components/FlashMessage";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <SnackbarProvider>
       {children}
+      <FlashMessage />
     </SnackbarProvider>
-  )
-} 
+  );
+}

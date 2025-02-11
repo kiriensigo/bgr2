@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { FlashMessage } from "@/components/FlashMessage"
+import { useSnackbar } from "@/contexts/SnackbarContext"
 
 // 仮のゲームデータ（実際の実装では、APIからデータを取得します）
 const game = {
@@ -49,8 +49,23 @@ const tags = [
   "動物",
 ]
 
+type ReviewState = {
+  overallScore: number
+  playTime: number
+  ruleComplexity: number
+  luckFactor: number
+  interaction: number
+  downtime: number
+  recommendedPlayers: string[]
+  mechanics: string[]
+  tags: string[]
+  customTags: string
+  shortComment: string
+}
+
 export default function ReviewForm() {
-  const [review, setReview] = useState({
+  const { setMessage } = useSnackbar()
+  const [review, setReview] = useState<ReviewState>({
     overallScore: 5,
     playTime: 2,
     ruleComplexity: 3,
@@ -64,22 +79,24 @@ export default function ReviewForm() {
     shortComment: "",
   })
 
-  const [flashMessage, setFlashMessage] = useState<string | null>(null)
-
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value, type } = e.target
+    const checked = (e.target as HTMLInputElement).checked
     setReview((prev) => ({
       ...prev,
-      [name]:
-        type === "checkbox" ? (checked ? [...prev[name], value] : prev[name].filter((item) => item !== value)) : value,
+      [name]: type === "checkbox" ? (checked ? [...(prev[name as keyof ReviewState] as string[]), value] : (prev[name as keyof ReviewState] as string[]).filter((item) => item !== value)) : value,
     }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // TODO: Implement review submission logic
-    console.log(review)
-    setFlashMessage("レビュー完了")
+    // レビュー送信処理
+    try {
+      // APIコール等の処理
+      setMessage("レビューを投稿しました！")
+    } catch (error) {
+      setMessage("エラーが発生しました")
+    }
   }
 
   return (
@@ -227,7 +244,7 @@ export default function ReviewForm() {
                 <input
                   type="checkbox"
                   name="recommendedPlayers"
-                  value={num}
+                  value={num.toString()}
                   checked={review.recommendedPlayers.includes(num.toString())}
                   onChange={handleChange}
                   className="mr-2"
@@ -299,7 +316,6 @@ export default function ReviewForm() {
           レビューを投稿
         </button>
       </form>
-      {flashMessage && <FlashMessage message={flashMessage} onClose={() => setFlashMessage(null)} />}
     </div>
   )
 }

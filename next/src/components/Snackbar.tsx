@@ -1,40 +1,45 @@
+"use client";
+
 import { Snackbar, Alert } from "@mui/material";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useSnackbarState } from "@/hooks/useGlobalState";
+import { useSnackbar } from "@/contexts/SnackbarContext";
+
+type Severity = "success" | "error" | "warning" | "info";
 
 const SuccessSnackbar = () => {
   const router = useRouter();
-  const [snackbar, setSnackbar] = useSnackbarState();
+  const { message, setMessage } = useSnackbar();
   const [open, setOpen] = useState(false);
+  const [severity, setSeverity] = useState<Severity>("success");
 
   useEffect(() => {
-    if (snackbar.pathname === router.pathname) {
+    if (message) {
       setOpen(true);
     }
-  }, [snackbar, router]);
+  }, [message]);
 
   const handleClose = (
-    event: React.SyntheticEvent | Event,
+    event?: React.SyntheticEvent | Event,
     reason?: string
   ) => {
     if (reason === "clickaway") {
       return;
     }
     setOpen(false);
-    setSnackbar({ message: null, severity: null, pathname: null });
+    setMessage("");
   };
 
   return (
     <>
-      {snackbar.severity != null && (
+      {message && (
         <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
           <Alert
             onClose={handleClose}
-            severity={snackbar.severity}
+            severity={severity}
             sx={{ width: "100%" }}
           >
-            {snackbar.message}
+            {message}
           </Alert>
         </Snackbar>
       )}

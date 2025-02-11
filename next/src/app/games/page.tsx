@@ -1,6 +1,26 @@
 import Link from "next/link"
 import Image from "next/image"
 
+type Review = {
+  id: number
+  user: string
+  rating: number
+  content: string
+  likes: number
+  date: string
+}
+
+type ShortReview = {
+  comment: string
+  likes: number
+}
+
+const initialReviews: Review[] = [
+  { id: 1, user: "ユーザー1", rating: 8, content: "素晴らしいゲームです！", likes: 5, date: "2023-05-01" },
+  { id: 2, user: "ユーザー2", rating: 7, content: "楽しいけど運要素が強いかも", likes: 3, date: "2023-05-02" },
+  { id: 3, user: "ユーザー3", rating: 9, content: "友達と遊ぶのに最高！", likes: 8, date: "2023-05-03" },
+]
+
 const games = [
   {
     id: 1,
@@ -43,7 +63,7 @@ const games = [
   },
 ]
 
-function getRandomShortReview(reviews) {
+function getRandomShortReview(reviews: ShortReview[]) {
   return reviews[Math.floor(Math.random() * reviews.length)].comment
 }
 

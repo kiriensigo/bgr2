@@ -4,6 +4,9 @@ import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 
+// 型定義
+type PlayerCount = string | number
+
 // 仮のゲームデータ（実際の実装では、APIからデータを取得します）
 const games = [
   {
@@ -42,15 +45,24 @@ const mechanics = [
   "エリアマジョリティ",
   "ワーカープレイスメント",
 ]
-const playerCounts = [1, 2, 3, 4, 5, "6人以上"]
+const playerCounts: PlayerCount[] = [1, 2, 3, 4, 5, "6人以上"]
 
 export default function SearchPage() {
   const [searchTerm, setSearchTerm] = useState("")
-  const [selectedTags, setSelectedTags] = useState([])
-  const [selectedMechanics, setSelectedMechanics] = useState([])
-  const [selectedPlayerCounts, setSelectedPlayerCounts] = useState([])
+  const [selectedTags, setSelectedTags] = useState<string[]>([])
+  const [selectedMechanics, setSelectedMechanics] = useState<string[]>([])
+  const [selectedPlayerCounts, setSelectedPlayerCounts] = useState<string[]>([])
   const [minRating, setMinRating] = useState(0)
   const [sortBy, setSortBy] = useState("name")
+
+  const handlePlayerCountChange = (count: PlayerCount) => {
+    setSelectedPlayerCounts((prev) => {
+      const countStr = count.toString()
+      return prev.includes(countStr)
+        ? prev.filter((c) => c !== countStr)
+        : [...prev, countStr]
+    })
+  }
 
   const filteredGames = games
     .filter(
@@ -91,13 +103,7 @@ export default function SearchPage() {
               <input
                 type="checkbox"
                 checked={selectedPlayerCounts.includes(count.toString())}
-                onChange={() => {
-                  setSelectedPlayerCounts((prev) =>
-                    prev.includes(count.toString())
-                      ? prev.filter((c) => c !== count.toString())
-                      : [...prev, count.toString()],
-                  )
-                }}
+                onChange={() => handlePlayerCountChange(count)}
                 className="mr-2"
               />
               {count}人

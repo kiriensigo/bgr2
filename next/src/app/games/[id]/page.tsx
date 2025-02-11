@@ -31,10 +31,10 @@ const initialReviews = [
   { id: 3, user: "ユーザー3", rating: 9, content: "友達と遊ぶのに最高！", likes: 8, date: "2023-05-03" },
 ]
 
-export default function GameReviews({ params }) {
+export default function GameReviews({ params }: { params: { id: string } }) {
   const [reviews, setReviews] = useState(initialReviews)
 
-  const handleLike = (reviewId) => {
+  const handleLike = (reviewId: number) => {
     setReviews(reviews.map((review) => (review.id === reviewId ? { ...review, likes: review.likes + 1 } : review)))
   }
 

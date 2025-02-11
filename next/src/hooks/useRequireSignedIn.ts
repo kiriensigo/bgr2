@@ -1,20 +1,19 @@
-import { useRouter } from 'next/router'
+"use client"
+
+import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
-import { useUserState, useSnackbarState } from '@/hooks/useGlobalState'
+import { useUserState } from '@/hooks/useGlobalState'
+import { useSnackbar } from '@/contexts/SnackbarContext'
 
 export function useRequireSignedIn() {
   const router = useRouter()
   const [user] = useUserState()
-  const [, setSnackbar] = useSnackbarState()
+  const { setMessage } = useSnackbar()
 
   useEffect(() => {
     if (user.isFetched && !user.isSignedIn) {
-      setSnackbar({
-        message: 'サインインしてください',
-        severity: 'error',
-        pathname: '/sign_in',
-      })
+      setMessage('サインインしてください')
       router.push('/sign_in')
     }
-  }, [user, router, setSnackbar])
+  }, [user, router, setMessage])
 }
