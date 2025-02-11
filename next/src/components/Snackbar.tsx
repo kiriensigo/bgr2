@@ -9,7 +9,7 @@ const SuccessSnackbar = () => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    if (snackbar.pathname == router.pathname) {
+    if (snackbar.pathname === router.pathname) {
       setOpen(true);
     }
   }, [snackbar, router]);

@@ -33,8 +33,13 @@ html {
  * Remove the margin in all browsers.
  */
 
-body {
+body, h1, h2, h3, h4, h5, h6, p, blockquote, pre, dl, dd, ol, ul, figure, hr, fieldset, legend, textarea, input, button {
   margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 
 /**
@@ -412,3 +417,5 @@ th {
   text-align: left;
   font-weight: bold;
 }
+
+/* その他のスタイルを追加 */

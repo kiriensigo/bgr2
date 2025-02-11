@@ -1,0 +1,57 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@400;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: 0 100% 70%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 174 84% 55%;
+  --secondary-foreground: 0 0% 100%;
+  --accent: 48 100% 62%;
+  --accent-foreground: 0 0% 0%;
+  --background: 48 67% 90%;
+  --foreground: 200 33% 26%;
+  --card: 0 0% 100%;
+  --card-foreground: 200 33% 26%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 200 33% 26%;
+  --border: 200 33% 26%;
+  --input: 200 33% 26%;
+  --ring: 174 84% 55%;
+  --radius: 0.5rem;
+}
+
+body {
+  @apply bg-background text-foreground font-sans;
+  background-image: url("/game-pattern.png");
+  background-repeat: repeat;
+  background-size: 200px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-display text-primary;
+}
+
+.btn {
+  @apply px-4 py-2 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2;
+}
+
+.btn-primary {
+  @apply bg-primary text-primary-foreground hover:bg-opacity-90 focus:ring-primary;
+}
+
+.btn-secondary {
+  @apply bg-secondary text-secondary-foreground hover:bg-opacity-90 focus:ring-secondary;
+}
+
+.card {
+  @apply bg-card text-card-foreground rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl;
+}
+

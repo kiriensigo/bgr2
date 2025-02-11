@@ -1,44 +1,64 @@
-import useSWR from "swr";
+"use client"
+
+import { createContext, useContext, useState } from 'react'
+import useSWR from 'swr'
+
+type SnackbarContextType = [
+  {
+    message: string | null
+    severity: 'success' | 'error' | 'warning' | 'info' | null
+    pathname: string | null
+  },
+  React.Dispatch<React.SetStateAction<{
+    message: string | null
+    severity: 'success' | 'error' | 'warning' | 'info' | null
+    pathname: string | null
+  }>>
+]
+
+const SnackbarContext = createContext<SnackbarContextType | undefined>(undefined)
 
 export const useUserState = () => {
-  type userStateType = {
-    id: number;
-    name: string;
-    email: string;
-    isSignedIn: boolean;
-    isFetched: boolean;
-  };
+  type UserStateType = {
+    id: number
+    name: string
+    email: string
+    isSignedIn: boolean
+    isFetched: boolean
+  }
 
-  const fallbackData: userStateType = {
+  const fallbackData: UserStateType = {
     id: 0,
     name: "",
     email: "",
     isSignedIn: false,
     isFetched: false,
-  };
+  }
 
   const { data: state, mutate: setState } = useSWR("user", null, {
-    fallbackData: fallbackData,
-  });
-  return [state, setState] as [userStateType, (value: userStateType) => void];
-};
-export const useSnackbarState = () => {
-  type snackbarStateType = {
-    message: null | string;
-    severity: null | "success" | "error";
-    pathname: null | string;
-  };
+    fallbackData,
+  })
+  return [state, setState] as [UserStateType, (value: UserStateType) => void]
+}
 
-  const fallbackData: snackbarStateType = {
+export const useSnackbarState = () => {
+  const context = useContext(SnackbarContext)
+  if (context === undefined) {
+    throw new Error('useSnackbarState must be used within a SnackbarProvider')
+  }
+  return context
+}
+
+export const SnackbarProvider = ({ children }: { children: React.ReactNode }) => {
+  const [snackbar, setSnackbar] = useState({
     message: null,
     severity: null,
     pathname: null,
-  };
-  const { data: state, mutate: setState } = useSWR("snackbar", null, {
-    fallbackData: fallbackData,
-  });
-  return [state, setState] as [
-    snackbarStateType,
-    (value: snackbarStateType) => void,
-  ];
-};
+  })
+
+  return (
+    <SnackbarContext.Provider value={[snackbar, setSnackbar]}>
+      {children}
+    </SnackbarContext.Provider>
+  )
+}
