@@ -1,57 +1,54 @@
 'use client'
-import Image from 'next/image'
-import Link from 'next/link'
 
-const recentReviews = [
+import Link from 'next/link'
+import Image from 'next/image'
+
+const recentGames = [
   {
     id: 1,
-    title: 'カタンのレビュー',
+    name: 'カタン',
     image: '/placeholder.svg?height=150&width=150',
-    score: 8.5,
+    averageScore: 8.5
   },
   {
     id: 2,
-    title: 'カルカソンヌのレビュー',
+    name: 'カルカソンヌ',
     image: '/placeholder.svg?height=150&width=150',
-    score: 8.2,
+    averageScore: 8.2
   },
   {
     id: 3,
-    title: 'ドミニオンのレビュー',
+    name: 'ドミニオン',
     image: '/placeholder.svg?height=150&width=150',
-    score: 8.7,
+    averageScore: 8.7
   },
   {
     id: 4,
-    title: 'パンデミックのレビュー',
+    name: 'パンデミック',
     image: '/placeholder.svg?height=150&width=150',
-    score: 8.3,
+    averageScore: 8.3
   },
   {
     id: 5,
-    title: 'チケット・トゥ・ライドのレビュー',
+    name: 'チケット・トゥ・ライド',
     image: '/placeholder.svg?height=150&width=150',
-    score: 8.4,
-  },
+    averageScore: 8.4
+  }
 ]
 
 export default function Home() {
   return (
     <div className="space-y-8">
       <h1 className="text-3xl sm:text-4xl font-display text-primary text-center">
-        最近のレビュー
+        最近レビューされたゲーム
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-        {recentReviews.map((review) => (
-          <Link
-            href={`/reviews/${review.id}`}
-            key={review.id}
-            className="card group"
-          >
+        {recentGames.map((game) => (
+          <Link href={`/games/${game.id}`} key={game.id} className="card group">
             <div className="relative aspect-square">
               <Image
-                src={review.image || '/placeholder.svg'}
-                alt={review.title}
+                src={game.image || '/placeholder.svg'}
+                alt={game.name}
                 fill
                 className="object-cover transition-transform duration-300 group-hover:scale-110"
               />
@@ -60,16 +57,16 @@ export default function Home() {
               </div>
             </div>
             <div className="p-4">
-              <h2 className="text-lg font-semibold mb-2">{review.title}</h2>
+              <h2 className="text-lg font-semibold mb-2">{game.name}</h2>
               <p className="text-black font-bold">
-                評価: {review.score.toFixed(1)}
+                評価: {game.averageScore.toFixed(1)}
               </p>
             </div>
           </Link>
         ))}
       </div>
       <div className="text-center">
-        <Link href="/reviews" className="btn btn-primary">
+        <Link href="/games" className="btn btn-primary">
           もっと見る
         </Link>
       </div>

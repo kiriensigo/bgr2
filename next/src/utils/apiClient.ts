@@ -3,8 +3,8 @@ import axios from 'axios'
 const apiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000',
   headers: {
-    'Content-Type': 'application/json',
-  },
+    'Content-Type': 'application/json'
+  }
 })
 
 // リクエストインターセプター
@@ -39,7 +39,7 @@ apiClient.interceptors.response.use(
   },
   (error) => {
     return Promise.reject(error)
-  },
+  }
 )
 
 export default apiClient

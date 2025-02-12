@@ -1,18 +1,13 @@
-'use client'
-import { Inter } from 'next/font/google'
 import './globals.css'
+import { Inter } from 'next/font/google'
 import ClientWrapper from '@/components/ClientWrapper'
 
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  preload: true
-})
+const inter = Inter({ subsets: ['latin'] })
 
-//export const metadata = {
-//title: 'ボードゲームレビュー',
-//description: 'ボードゲームのレビューサイト'
-//}
+export const metadata = {
+  title: 'ボードゲームレビュー',
+  description: 'ボードゲームのレビューと情報を共有するサイト'
+}
 
 export default function RootLayout({
   children
@@ -20,8 +15,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ja" className={inter.className}>
-      <body>
+    <html lang="ja">
+      <body className={inter.className}>
         <ClientWrapper>{children}</ClientWrapper>
       </body>
     </html>

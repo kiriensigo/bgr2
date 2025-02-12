@@ -1,5 +1,8 @@
 {
   "scripts": {
-    // format と lint のスクリプトを削除
+    "dev": "next dev -p 8000",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   }
 } 

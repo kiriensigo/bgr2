@@ -8,7 +8,7 @@ export default function ClientWrapper({
   children: React.ReactNode
 }) {
   return (
-    <div className="flex flex-col min-h-screen bg-background text-foreground">
+    <div className="min-h-screen">
       <ClientLayout>{children}</ClientLayout>
     </div>
   )
